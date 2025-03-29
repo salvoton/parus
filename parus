@@ -1,0 +1,76 @@
+ #!/usr/bin/env bash
+
+skim="sk --ansi --multi --tiebreak=length --preview 'paru --color=always -Si {1}' \
+--preview-window=right:60% --inline-info --bind 'tab:toggle' --color=pointer:white"
+
+install() {
+    $2 -Sl --color=always |\
+    awk '{if (NF > 3) {$4 = "\033[1;33m* ";} print $2, $4 $1;}' |\
+    eval "$skim" -p="$1:" |\
+    awk '{print $NF "/" $1}' |\
+    xargs -ro paru -S
+}
+
+query() {
+    $2 --color=always |\
+    eval "$skim" -p="$1:" |\
+    awk '{print $1}' |\
+    xargs -ro $3
+}
+
+upgrade() {
+    paru -Sy || exit 6
+    upgradablePackages=$(paru -Qu --color=always)
+    [ -z "$upgradablePackages" ] &&\
+    echo -e "\033[1m:: There is no upgradable package :)\033[0m" && exit 0
+    echo "$upgradablePackages" |\
+    eval "$skim" -p="$1:" |\
+    awk '{print $1}' |\
+    xargs -ro paru -S --needed
+}
+
+help() {
+    prog=$(basename "$0")
+    cat << EOF
+Usage:
+    $prog       -> Default action
+    $prog [opt] -> Other options
+
+    The default action is to search and install packages.
+    '*' means that the package is already installed.
+
+Info:
+    A package search tool for Paru using Skim.
+    It can be used to install, upgrade, query and remove packages.
+
+Multiple Selection:
+    Tab         -> Select / Deselect
+    Ctrl + i    -> Select / Deselect
+
+Options:
+    h -> Print this message
+    n -> Install non-AUR packages
+    u -> Upgrade upgradable packages
+    q -> Show installed packages
+    Q -> Show explicitly installed packages
+    r -> Remove installed packages
+    R -> Remove explicitly installed packages
+EOF
+}
+
+invalidOption() {
+    echo "Error: Invalid option. Use '$(basename "$0") -h' for help."
+    exit 2
+}
+
+[ -n "$2" ] && invalidOption
+case $1 in
+    "") install ":" "paru";;
+    -n | n) install "n" "pacman";;
+    -u | u) upgrade "u";;
+    -q | q) query "q" "paru -Q" "echo";;
+    -Q | Q) query "Q" "paru -Qe" "echo";;
+    -r | r) query "r" "paru -Q" "paru -R";;
+    -R | R) query "R" "paru -Qe" "paru -R";;
+    -h | h | --help) help;; *) invalidOption;;
+esac
