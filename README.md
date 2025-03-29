@@ -34,8 +34,9 @@ The default action is to search and install packages.<br>
 
 ## Installation
 ### AUR
-Not yet...
-
+```sh
+paru -S parus
+```
 ### Direct Download
 ```sh
 sudo curl -o /usr/bin/parus https://raw.githubusercontent.com/salvoton/parus/master/parus
