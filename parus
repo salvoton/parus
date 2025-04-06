@@ -5,7 +5,7 @@ skim="sk --ansi --multi --tiebreak=length --preview 'paru --color=always -Si {1}
 
 install() {
     errorMsg=$(mktemp)
-    paru -Sl --color=always 2> $errorMsg |\
+    $2 -Sl --color=always 2> $errorMsg |\
     awk '{if (NF > 3) {$4 = "\033[1;33m* ";} print $2, $4 $1;}' |\
     eval "$skim" -p="$1:" |\
     awk '{print $NF "/" $1}' |\
