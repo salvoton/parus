@@ -17,7 +17,7 @@ install() {
 }
 
 query() {
-    $2 --color=always |\
+    paru $2 --color=always |\
     eval "$skim" -p="$1:" |\
     awk '{print $1}' |\
     xargs -ro $3
@@ -33,7 +33,7 @@ upgrade() {
     [ -z "$pkgs" ] &&\
     echo " there is no upgradable package" && exit 0
     echo " listed $pkgsCount package$( [ "$pkgsCount" -eq 1 ] || echo s )"
-    eval "$skim" -p="$1:" <<< $pkgs |\
+    eval "$skim" -p="u:" <<< $pkgs |\
     awk '{print $1}' |\
     xargs -ro paru -S --needed
 }
@@ -76,10 +76,10 @@ invalidOption() {
 case $1 in
     "") install ":" "paru";;
     -n | n) install "n" "pacman";;
-    -u | u) upgrade "u";;
-    -q | q) query "q" "paru -Q" "echo";;
-    -Q | Q) query "Q" "paru -Qe" "echo";;
-    -r | r) query "r" "paru -Q" "paru -R";;
-    -R | R) query "R" "paru -Qe" "paru -R";;
+    -u | u) upgrade;;
+    -q | q) query "q" "-Q";;
+    -Q | Q) query "Q" "-Qe";;
+    -r | r) query "r" "-Q" "paru -R";;
+    -R | R) query "R" "-Qe" "paru -R";;
     -h | h | --help) help;; *) invalidOption;;
 esac
