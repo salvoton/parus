@@ -33,7 +33,7 @@ The default action is to search and install packages.<br>
 * Bash
 
 ## Installation
-### AUR
+### AUR (via paru)
 ```sh
 paru -S parus
 ```
