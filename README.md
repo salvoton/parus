@@ -15,7 +15,6 @@ The default action is to search and install packages.<br>
 | Option   | Description                          |
 |----------|--------------------------------------|
 | h        | Print help message                   |
-| n        | Install non-AUR packages             |
 | u        | Upgrade upgradable packages          |
 | q        | Show installed packages              |
 | Q        | Show explicitly installed packages   |
