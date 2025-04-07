@@ -9,7 +9,7 @@ install() {
     awk '{if (NF > 3) {$4 = "\033[1;33m* ";} print $2, $4 $1;}' |\
     eval "$skim" -p="$1:" |\
     awk '{print $NF "/" $1}' |\
-    xargs -ro paru -S || echo
+    xargs -ro $2 || echo
     [ -s $errorMsg ] &&\
     cat $errorMsg &&\
     echo -e "\n\033[1mError:\033[0m Paru is not functioning properly. Please check your connection."
@@ -58,6 +58,7 @@ Multiple Selection:
 
 Options:
     h -> Print this message
+    p -> Print only; do not install
     u -> Upgrade upgradable packages
     q -> Show installed packages
     Q -> Show explicitly installed packages
@@ -73,7 +74,8 @@ invalidOption() {
 
 [ -n "$2" ] && invalidOption
 case $1 in
-    "") install ":";;
+    "") install ":" "paru -S";;
+    -p | p) install "p";;
     -u | u) upgrade;;
     -q | q) query "q" "-Q";;
     -Q | Q) query "Q" "-Qe";;
