@@ -1,4 +1,4 @@
- #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 skim="sk --ansi --multi --tiebreak=length --preview 'paru --color=always -Si {1}' -n 1 \
 --preview-window=right:60% --inline-info --bind 'tab:toggle' --color=pointer:white"
