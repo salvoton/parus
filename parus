@@ -2,8 +2,9 @@
 
 version="1.1.0"
 
-skim="sk --ansi --multi --tiebreak=length --preview 'paru --color=always -Si {1} || paru --color=always -Qi {1}' -n 1 \
---preview-window=right:60% --inline-info --bind 'tab:toggle' --color=pointer:white"
+skim="sk --ansi --multi --tiebreak=length -n 1 --inline-info \
+--preview 'paru --color=always -Si {1} || paru --color=always -Qi {1}' \
+--preview-window=right:60% --bind 'tab:toggle' --color=pointer:white"
 
 install() {
     errorMsg=$(mktemp)
