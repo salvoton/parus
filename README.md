@@ -1,5 +1,5 @@
 # [Parus](https://github.com/salvoton/parus)
-A package search tool for [Paru](https://github.com/Morganamilo/paru) using [Skim](https://github.com/skim-rs/skim).
+A package search TUI for [Paru](https://github.com/Morganamilo/paru) using [Skim](https://github.com/skim-rs/skim).
 It can be used to install, upgrade, query and remove packages.
 
 ## Usage
