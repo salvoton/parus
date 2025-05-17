@@ -2,15 +2,23 @@
 
 version="1.1.1"
 
-skim="sk --ansi --multi --tiebreak=length -n 1 --inline-info \
---preview 'paru --color=always -Si {1} || paru --color=always -Qi {1}' \
---preview-window=right:60% --bind 'tab:toggle' --color=pointer:white"
+export SKIM_DEFAULT_OPTIONS="
+    --ansi
+    --multi
+    --tiebreak=length
+    --inline-info
+    --preview 'paru --color=always -Si {1}'
+    --preview-window=right:60%
+    --nth 1
+    --bind 'tab:toggle'
+    --color=pointer:white
+"
 
 install() {
     errorMsg=$(mktemp)
     paru -Sl --color=always 2> $errorMsg |\
     awk '{if (NF > 3) {$4 = "\033[1;33m* ";} print $2, $4 $1;}' |\
-    eval "$skim" -p="$1:" |\
+    sk --prompt="$1:" |\
     awk '{print $NF "/" $1}' |\
     xargs -ro $2 || echo
     [ -s $errorMsg ] &&\
@@ -21,7 +29,7 @@ install() {
 
 query() {
     paru $2 --color=always |\
-    eval "$skim" -p="$1:" |\
+    sk --prompt="$1:" --preview "paru --color=always -Qi {1}" |\
     awk '{print $1}' |\
     xargs -ro $3
 }
@@ -36,7 +44,7 @@ upgrade() {
     [ -z "$pkgs" ] &&\
     echo " there is no upgradable package" && exit 0
     echo " listed $pkgsCount package$( [ "$pkgsCount" -eq 1 ] || echo s )"
-    eval "$skim" -p="u:" <<< $pkgs |\
+    sk --prompt="u:" <<< $pkgs |\
     awk '{print $1}' |\
     xargs -ro paru -S --needed
 }
