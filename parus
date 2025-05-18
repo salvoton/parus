@@ -23,7 +23,8 @@ install() {
     xargs -ro $2 || echo
     [ -s $errorMsg ] &&\
     cat $errorMsg &&\
-    echo -e "\n\033[1mError:\033[0m Paru is not functioning properly. Please check your connection."
+    echo -e "\033[1mError:\033[0m Paru is not functioning properly." \
+    "Please check your connection." >&2
     rm -f $errorMsg
 }
 
