@@ -81,7 +81,8 @@ EOF
 }
 
 invalidOption() {
-    echo -e "\033[1mError:\033[0m Invalid option. Use '$(basename "$0") -h' for help."
+    echo -e "\033[1mError:\033[0m Invalid option." \
+    "Use '$(basename "$0") -h' for help." >&2
     exit 2
 }
 
