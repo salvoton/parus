@@ -20,7 +20,7 @@ install() {
     awk '{if (NF > 3) {$4 = "\033[1;33m* ";} print $2, $4 $1;}' |\
     sk --prompt="$1:" |\
     awk '{print $NF "/" $1}' |\
-    xargs -ro $2 || echo
+    xargs -ro $2
     [ -s $errorMsg ] &&\
     cat $errorMsg &&\
     echo -e "\033[1mError:\033[0m Paru is not functioning properly." \
