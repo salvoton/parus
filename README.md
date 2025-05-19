@@ -17,10 +17,10 @@ The default action is to search and install packages.<br>
 | h        | Print help message                   |
 | p        | Print only; do not install           |
 | u        | Upgrade upgradable packages          |
-| q        | Show installed packages              |
-| Q        | Show explicitly installed packages   |
 | r        | Remove installed packages            |
 | R        | Remove explicitly installed packages |
+| q        | Show installed packages              |
+| Q        | Show explicitly installed packages   |
 
 ### Multiple Selection:
 | Bind     | Action            |

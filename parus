@@ -73,10 +73,10 @@ Options:
     h -> Print this message
     p -> Print only; do not install
     u -> Upgrade upgradable packages
-    q -> Show installed packages
-    Q -> Show explicitly installed packages
     r -> Remove installed packages
     R -> Remove explicitly installed packages
+    q -> Show installed packages
+    Q -> Show explicitly installed packages
 EOF
 }
 
@@ -91,9 +91,9 @@ case $1 in
     "") install ":" "paru -S";;
     -p | p) install "p";;
     -u | u) upgrade;;
-    -q | q) query "q" "-Q";;
-    -Q | Q) query "Q" "-Qe";;
     -r | r) query "r" "-Q" "paru -R";;
     -R | R) query "R" "-Qe" "paru -R";;
+    -q | q) query "q" "-Q";;
+    -Q | Q) query "Q" "-Qe";;
     -h | h | --help) help;; *) invalidOption;;
 esac
