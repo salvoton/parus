@@ -55,8 +55,8 @@ help() {
     cat << EOF
 Info:
     $prog v$version
-    A package search TUI for Paru using Skim.
-    It can be used to install, upgrade, query and remove packages.
+    A package search TUI for Paru, powered by Skim.
+    It can install, upgrade, remove, and query packages.
 
 Usage:
     $prog       -> Default action
