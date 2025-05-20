@@ -8,8 +8,8 @@ It can install, upgrade, remove, and query packages.
 | parus       | Default action |
 | parus [opt] | Other options  |
 
-The default action is to search and install packages.<br>
-'*' means that the package is already installed.
+The default action is to search for and install packages..<br>
+A '*' indicates that the package is already installed.
 
 ### Options:
 | Option   | Description                          |

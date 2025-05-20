@@ -62,8 +62,8 @@ Usage:
     $prog       -> Default action
     $prog [opt] -> Other options
 
-    The default action is to search and install packages.
-    '*' means that the package is already installed.
+    The default action is to search for and install packages.
+    A '*' indicates that the package is already installed.
 
 Multiple Selection:
     Tab         -> Select / Deselect
