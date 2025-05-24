@@ -2,6 +2,8 @@
 A package search TUI for [Paru](https://github.com/Morganamilo/paru), powered by [Skim](https://github.com/skim-rs/skim).
 It can install, upgrade, remove, and query packages.
 
+[![asciicast](https://asciinema.org/a/720673.svg)](https://asciinema.org/a/720673)
+
 ## Usage
 | Usage       | Action         |
 |-------------|----------------|
