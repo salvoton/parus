@@ -8,7 +8,7 @@ export SKIM_DEFAULT_OPTIONS="
     --tiebreak=length
     --inline-info
     --preview 'paru --color=always -Si {1}'
-    --preview-window=right:60%
+    --preview-window=right:60%:wrap
     --nth 1
     --bind 'tab:toggle'
     --color=pointer:white
