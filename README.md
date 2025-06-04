@@ -2,6 +2,10 @@
 A package search TUI for [Paru](https://github.com/Morganamilo/paru), powered by [Skim](https://github.com/skim-rs/skim).
 It can install, upgrade, remove, and query packages.
 
+[![AUR Version](https://img.shields.io/aur/version/parus?style=for-the-badge&logo=archlinux)](https://aur.archlinux.org/packages/parus)
+![AUR Votes](https://img.shields.io/aur/votes/parus?style=for-the-badge&logo=archlinux)
+![GitHub Repo stars](https://img.shields.io/github/stars/salvoton/parus?style=for-the-badge&logo=github)
+
 [![asciicast](https://asciinema.org/a/720673.svg)](https://asciinema.org/a/720673)
 
 ## Usage
