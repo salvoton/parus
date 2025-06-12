@@ -13,12 +13,18 @@ export SKIM_DEFAULT_OPTIONS="
     --bind 'tab:toggle'
     --color=pointer:white
 "
+skimPreview() {
+    cat << EOF
+    paru --color=always $1 {1} |\
+    awk '{ sub(/ *:/,":"); \$1 = \$1; print }'
+EOF
+}
 
 install() {
     errorMsg=$(mktemp)
     paru -Sl --color=always 2> $errorMsg |\
     awk '{if (NF > 3) {$4 = "\033[1;33m* ";} print $2, $4 $1;}' |\
-    sk --prompt="$1:" |\
+    sk --prompt="$1:" --preview "$(skimPreview -Si)" |\
     awk '{print $NF "/" $1}' |\
     xargs -ro $2
     [ -s $errorMsg ] &&\
@@ -30,7 +36,7 @@ install() {
 
 query() {
     paru $2 --color=always |\
-    sk --prompt="$1:" --preview "paru --color=always -Qi {1}" |\
+    sk --prompt="$1:" --preview "$(skimPreview -Qi)" |\
     awk '{print $1}' |\
     xargs -ro $3
 }
@@ -45,7 +51,7 @@ upgrade() {
     [ -z "$pkgs" ] &&\
     echo " there is no upgradable package" && exit 0
     echo " listed $pkgsCount package$( [ "$pkgsCount" -eq 1 ] || echo s )"
-    sk --prompt="u:" <<< $pkgs |\
+    sk --prompt="u:" --preview "$(skimPreview -Si)" <<< $pkgs |\
     awk '{print $1}' |\
     xargs -ro paru -S --needed
 }
