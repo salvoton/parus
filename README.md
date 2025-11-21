@@ -2,7 +2,6 @@
 
 [![AUR Version](https://img.shields.io/aur/version/parus?style=for-the-badge&logo=archlinux)](https://aur.archlinux.org/packages/parus)
 [![AUR Votes](https://img.shields.io/aur/votes/parus?style=for-the-badge&logo=archlinux)](https://aur.archlinux.org/packages/parus)
-[![GitHub Repo stars](https://img.shields.io/github/stars/salvoton/parus?style=for-the-badge&logo=github)](https://github.com/salvoton/parus/stargazers)
 
 ## Description
 A package search TUI for [Paru](https://github.com/Morganamilo/paru), powered by [Skim](https://github.com/skim-rs/skim).
@@ -35,19 +34,17 @@ A '*' indicates that the package is already installed.
 |----------|-------------------|
 | Tab      | Select / Deselect |
 | Ctrl + i | Select / Deselect |
+
 ## Requirements
 * [Paru](https://github.com/Morganamilo/paru)
 * [Skim](https://github.com/skim-rs/skim)
-* [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell))
+* [Bash](https://www.gnu.org/software/bash/bash.html)
 
 ## Installation
+
+⚠️ **Warning: Please be careful when using AUR**
+
 ### AUR (via paru)
 ```sh
 paru -S parus
-```
-### Direct Download
-```sh
-sudo curl -o /usr/bin/parus https://raw.githubusercontent.com/salvoton/parus/master/parus
-sudo chmod +x /usr/bin/parus
-# To uninstall, remove '/usr/bin/parus'
 ```
