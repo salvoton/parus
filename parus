@@ -19,8 +19,7 @@ install() {
     xargs -ro $2
     [ -s $error_msg ] &&\
     cat $error_msg &&\
-    echo -e "\033[1mError:\033[0m Paru is not functioning properly." \
-    "Please check your connection." >&2
+    printf "\033[1mError:\033[0m Paru is not functioning properly. Please check your connection.\n" >&2
     rm -f $error_msg
 }
 
@@ -34,13 +33,13 @@ query() {
 upgrade() {
     paru -Sy 2> /dev/null
     [ $? -ne 0 ] &&\
-    echo -e "\033[1mError:\033[0m Updating the package databases failed." >&2 && exit 7
-    echo -e "\033[1m:: Checking for upgradable packages...\033[0m"
+    printf "\033[1mError:\033[0m Updating the package databases failed.\n" >&2
+    printf "\033[1m:: Checking for upgradable packages...\033[0m\n"
     pkgs=$(paru -Qu --color=always 2> /dev/null)
     pkgs_count=$(wc -l <<< "$pkgs")
     [ -z "$pkgs" ] &&\
-    echo " there is no upgradable package" && exit 0
-    echo " listed $pkgs_count package$( [ "$pkgs_count" -eq 1 ] || echo s )"
+    printf " there is no upgradable package\n" && exit 0
+    printf " listed %d package%s\n" "$pkgs_count" "$( [ "$pkgs_count" -eq 1 ] || printf s )"
     sk --prompt="u:" --preview "$(skim_preview -Si)" <<< $pkgs |\
     awk '{print $1}' |\
     xargs -ro paru -S --needed
@@ -77,8 +76,8 @@ EOF
 }
 
 invalid_option() {
-    echo -e "\033[1mError:\033[0m Invalid option." \
-    "Use '$(basename "$0") -h' for help." >&2
+    printf "\033[1mError:\033[0m Invalid option. " >&2
+    printf "Use \"%s --help\" for more information.\n" "$(basename "$0")" >&2
     exit 2
 }
 
