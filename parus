@@ -26,10 +26,12 @@ install() {
 }
 
 query() {
-    paru $2 --color=always |\
+    read -ra cmd <<< "$3"
+
+    paru "$2" --color=always |\
     sk --prompt="$1:" --preview "$(skim_preview -Qi)" |\
     awk '{print $1}' |\
-    xargs -ro $3
+    xargs -ro "${cmd[@]}"
 }
 
 upgrade() {
