@@ -5,28 +5,28 @@ version="1.1.4"
 export SKIM_DEFAULT_OPTIONS="--ansi --multi --tiebreak=length --inline-info \
 --preview-window=right:60%:wrap --nth 1 --bind 'tab:toggle' --color=pointer:white"
 
-skimPreview() {
+skim_preview() {
     printf "paru --color=always %s {1} | " "$1"
     printf "awk '{ sub(/ *:/,\":\"); \$1 = \$1; print }'\n"
 }
 
 install() {
-    errorMsg=$(mktemp)
-    paru -Sl --color=always 2> $errorMsg |\
+    error_msg=$(mktemp)
+    paru -Sl --color=always 2> $error_msg |\
     awk '{if (NF > 3) {$4 = "\033[1;33m* ";} print $2, $4 $1;}' |\
-    sk --prompt="$1:" --preview "$(skimPreview -Si)" |\
+    sk --prompt="$1:" --preview "$(skim_preview -Si)" |\
     awk '{print $NF "/" $1}' |\
     xargs -ro $2
-    [ -s $errorMsg ] &&\
-    cat $errorMsg &&\
+    [ -s $error_msg ] &&\
+    cat $error_msg &&\
     echo -e "\033[1mError:\033[0m Paru is not functioning properly." \
     "Please check your connection." >&2
-    rm -f $errorMsg
+    rm -f $error_msg
 }
 
 query() {
     paru $2 --color=always |\
-    sk --prompt="$1:" --preview "$(skimPreview -Qi)" |\
+    sk --prompt="$1:" --preview "$(skim_preview -Qi)" |\
     awk '{print $1}' |\
     xargs -ro $3
 }
@@ -37,11 +37,11 @@ upgrade() {
     echo -e "\033[1mError:\033[0m Updating the package databases failed." >&2 && exit 7
     echo -e "\033[1m:: Checking for upgradable packages...\033[0m"
     pkgs=$(paru -Qu --color=always 2> /dev/null)
-    pkgsCount=$(wc -l <<< "$pkgs")
+    pkgs_count=$(wc -l <<< "$pkgs")
     [ -z "$pkgs" ] &&\
     echo " there is no upgradable package" && exit 0
-    echo " listed $pkgsCount package$( [ "$pkgsCount" -eq 1 ] || echo s )"
-    sk --prompt="u:" --preview "$(skimPreview -Si)" <<< $pkgs |\
+    echo " listed $pkgs_count package$( [ "$pkgs_count" -eq 1 ] || echo s )"
+    sk --prompt="u:" --preview "$(skim_preview -Si)" <<< $pkgs |\
     awk '{print $1}' |\
     xargs -ro paru -S --needed
 }
@@ -76,13 +76,13 @@ Options:
 EOF
 }
 
-invalidOption() {
+invalid_option() {
     echo -e "\033[1mError:\033[0m Invalid option." \
     "Use '$(basename "$0") -h' for help." >&2
     exit 2
 }
 
-[ -n "$2" ] && invalidOption
+[ -n "$2" ] && invalid_option
 case $1 in
     "") install ":" "paru -S";;
     -p | p) install "p";;
@@ -91,5 +91,5 @@ case $1 in
     -R | R) query "R" "-Qe" "paru -R";;
     -q | q) query "q" "-Q";;
     -Q | Q) query "Q" "-Qe";;
-    -h | h | --help) help;; *) invalidOption;;
+    -h | h | --help) help;; *) invalid_option;;
 esac
