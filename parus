@@ -44,7 +44,7 @@ upgrade() {
     [ -z "$pkgs" ] &&\
     printf " there is no upgradable package\n" && exit 0
     printf " listed %d package%s\n" "$pkgs_count" "$( [ "$pkgs_count" -eq 1 ] || printf s )"
-    sk --prompt="u:" --preview "$(skim_preview -Si)" <<< $pkgs |\
+    sk --prompt="u:" --preview "$(skim_preview -Si)" <<< "$pkgs" |\
     awk '{print $1}' |\
     xargs -ro paru -S --needed
 }
