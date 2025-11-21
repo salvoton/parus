@@ -19,9 +19,12 @@ install() {
     sk --prompt="$1:" --preview "$(skim_preview -Si)" |\
     awk '{print $NF "/" $1}' |\
     xargs -ro "${cmd[@]}"
-    [ -s "$error_msg" ] &&\
-    cat "$error_msg" &&\
-    printf "\033[1mError:\033[0m Paru is not functioning properly. Please check your connection.\n" >&2
+    
+    [ -s "$error_msg" ] && {
+        cat "$error_msg" >&2
+        printf "\033[1mError:\033[0m Paru is not functioning properly. " >&2
+        printf "Please check your connection.\n" >&2
+    }
     rm -f "$error_msg"
 }
 
