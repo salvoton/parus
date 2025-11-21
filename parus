@@ -35,9 +35,11 @@ query() {
 }
 
 upgrade() {
-    paru -Sy 2> /dev/null
-    [ $? -ne 0 ] &&\
-    printf "\033[1mError:\033[0m Updating the package databases failed.\n" >&2
+    paru -Sy 2> /dev/null || {
+        printf "\033[1mError:\033[0m Updating the package databases failed.\n" >&2
+        exit 7
+    }
+    
     printf "\033[1m:: Checking for upgradable packages...\033[0m\n"
     pkgs=$(paru -Qu --color=always 2> /dev/null)
     pkgs_count=$(wc -l <<< "$pkgs")
