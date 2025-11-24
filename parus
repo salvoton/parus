@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version="1.1.4"
+version="1.1.5"
 
 export SKIM_DEFAULT_OPTIONS="--ansi --multi --tiebreak=length --inline-info \
 --preview-window=right:60%:wrap --nth 1 --bind 'tab:toggle' --color=pointer:white"
