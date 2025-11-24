@@ -7,7 +7,7 @@
 A package search TUI for [Paru](https://github.com/Morganamilo/paru), powered by [Skim](https://github.com/skim-rs/skim).
 It can install, upgrade, remove, and query packages.
 
-[![asciicast](https://asciinema.org/a/720673.svg)](https://asciinema.org/a/720673)
+[![asciicast](https://asciinema.org/a/wa7QiPqDWUalqB0mFrLeeBx5D.svg)](https://asciinema.org/a/wa7QiPqDWUalqB0mFrLeeBx5D)
 
 ## Usage
 | Usage       | Action         |
@@ -41,10 +41,13 @@ A '*' indicates that the package is already installed.
 * [Bash](https://www.gnu.org/software/bash/bash.html)
 
 ## Installation
-
-⚠️ **Warning: Please be careful when using AUR**
+**Note:**
+Before using the Arch User Repository (AUR), make sure you understand how it works and the potential risks involved.
 
 ### AUR (via paru)
 ```sh
 paru -S parus
 ```
+
+## License
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0). See the LICENSE file in the project root for the full license text.
