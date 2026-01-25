@@ -49,7 +49,7 @@ query() {
 
 upgrade() {
 	paru -Sy 2>/dev/null || {
-		printf "\033[1mError:\033[0m Updating the package databases failed.\n" >&2
+		printf "\033[31;1merror:\033[0m updating the package databases failed\n" >&2
 		exit 7
 	}
 
