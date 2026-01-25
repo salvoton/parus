@@ -30,8 +30,8 @@ install() {
 	[ -n "$PKG_FETCH_PID" ] && kill -TERM "$PKG_FETCH_PID"
 
 	[ ! -s "$paru_sl_exit_code" ] || {
-		printf "\033[1mWarning:\033[0m Failed to fetch the package list." >&2
-		printf " \"paru -Sl\" exited with code: %s\n" "$(cat "$paru_sl_exit_code")" >&2
+		printf "\033[33;1mwarning:\033[0m failed to fetch the package list" >&2
+		printf " (\"paru -Sl\" failed: exit status: %s)\n" "$(cat "$paru_sl_exit_code")" >&2
 	}
 
 	awk '{print $NF "/" $1}' "$sk_out" |
