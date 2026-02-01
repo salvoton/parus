@@ -3,7 +3,8 @@
 version="1.1.5"
 
 export SKIM_DEFAULT_OPTIONS="--ansi --multi --tiebreak=length --inline-info \
---preview-window=right:60%:wrap --nth 1 --bind 'tab:toggle' --color=pointer:white"
+--preview-window=right:60%:wrap --nth 1 --border rounded --marker '*' \
+--bind 'tab:toggle,alt-j:preview-down,alt-k:preview-up'"
 
 skim_preview() {
 	printf "paru --color=always %s {1} | " "$1"
