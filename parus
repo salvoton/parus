@@ -7,7 +7,7 @@ export SKIM_DEFAULT_OPTIONS="--ansi --multi --tiebreak=length --inline-info \
 --bind 'tab:toggle,alt-j:preview-down,alt-k:preview-up'"
 
 skim_preview() {
-	printf "paru --color=always %s {1} | " "$1"
+	printf "COLUMNS=0 paru --color=always %s {1} | " "$1"
 	printf "awk '{ sub(/ *:/,\":\"); \$1 = \$1; print }'\n"
 }
 
